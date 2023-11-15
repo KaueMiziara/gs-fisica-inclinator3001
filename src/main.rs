@@ -4,6 +4,7 @@
 use esp_backtrace as _;
 use esp_println::println;
 use hal::{clock::ClockControl, peripherals::Peripherals, prelude::*, Delay, i2c, IO, Rtc, timer::TimerGroup};
+use inclinator3001::accelerometer::{AccelerometerData, self};
 use mpu6050::Mpu6050;
 
 #[entry]
@@ -47,11 +48,11 @@ fn main() -> ! {
     mpu.init(&mut delay).expect("Ocorreu um erro ao inicializar o MPU6050!");
     
     loop {
-        let (acc_x, acc_y, acc_z) = match mpu.get_acc() {
-            Ok(acc) => (acc[0], acc[1], acc[2]),
+        let accelerometer_data = match mpu.get_acc() {
+            Ok(acc) => AccelerometerData::new(acc[0], acc[1], acc[2]),
             Err(_) => {
                 println!("Ocorreu um erro ao ler os dados do MPU6050!");
-                (0.0, 0.0, 0.0)
+                AccelerometerData::new(0.0, 0.0, 0.0)
             }
         };
         
