@@ -7,7 +7,10 @@ authors = [
     "Leonardo Garcia Melo <lgarciamelo213@gmail.com>"
 ]
 edition = "2021"
+publish = false
 license = "MIT OR Apache-2.0"
+
+description = "Programa utilizado para mediar inclinações utilizando um MPU6050."
 
 [dependencies]
 hal = { package = "esp32-hal", version = "0.12.0" }
