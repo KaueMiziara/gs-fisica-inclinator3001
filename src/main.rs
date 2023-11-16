@@ -3,9 +3,15 @@
 
 use esp_backtrace as _;
 use esp_println::println;
-use hal::{clock::ClockControl, peripherals::Peripherals, prelude::*, Delay, i2c, IO, Rtc, timer::TimerGroup};
-use inclinator3001::accelerometer::{AccelerometerData, self};
+use hal::{
+    clock::ClockControl, i2c, peripherals::Peripherals, prelude::*, timer::TimerGroup, Delay, Rtc,
+    IO,
+};
+use crate::accelerometer::AccelerometerAngles;
 use mpu6050::Mpu6050;
+
+mod accelerometer;
+mod conversion;
 
 #[entry]
 fn main() -> ! {
@@ -29,7 +35,7 @@ fn main() -> ! {
     rtc.rwdt.disable();
     wdt0.disable();
     wdt1.disable();
-    
+
     let mut delay = Delay::new(&clocks);
 
     let io = IO::new(peripherals.GPIO, peripherals.IO_MUX);
@@ -45,17 +51,16 @@ fn main() -> ! {
     delay.delay_ms(255u8);
 
     let mut mpu = Mpu6050::new(i2c);
-    mpu.init(&mut delay).expect("Ocorreu um erro ao inicializar o MPU6050!");
-    
+    mpu.init(&mut delay)
+        .expect("Ocorreu um erro ao inicializar o MPU6050!");
+
     loop {
-        let accelerometer_data = match mpu.get_acc() {
-            Ok(acc) => AccelerometerData::new(acc[0], acc[1], acc[2]),
-            Err(_) => {
-                println!("Ocorreu um erro ao ler os dados do MPU6050!");
-                AccelerometerData::new(0.0, 0.0, 0.0)
-            }
-        };
-        
-        delay.delay_ms(500u32);
+        let accelerometer_angles = AccelerometerAngles::new(&mut mpu);
+
+        accelerometer_angles.print_angles();
+
+        delay.delay_ms(750u32);
+
+        println!();
     }
 }
