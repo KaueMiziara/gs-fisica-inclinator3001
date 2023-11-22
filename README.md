@@ -40,8 +40,8 @@ Utilizando o Framework do Arduino, estes ângulos teriam que ser calculados manu
 ### Demonstração
 Estes ângulos descrevem a inclinação do acelerômetro em relação ao solo. No contexto deste projeto, permitem medir a inclinação do antebraço de uma pessoa utilizando uma smartshirt. <br>
 
-Abaixo, um vídeo demonstrando o protótipo funcionando:
-[![Demo]()](https://www.youtube.com/watch?v=fgXRD-v5Gzs)
+Abaixo, um vídeo demonstrando o protótipo funcionando: <br>
+[![Demo](mpu6050.jpg)](https://www.youtube.com/watch?v=fgXRD-v5Gzs)
 
 ## Como instalar
 Segue as instruções para rodar o código:
