@@ -16,10 +16,10 @@ Seja ```X```, ```Y``` e ```Z``` os vetores correspondentes à aceleração nos e
 Seja &alpha; o plano do acelerômetro (considerado perfeitamente plano por simplicidade). Seja &theta; o ângulo de inclinação (ângulo de &alpha; em relação ao solo em torno do eixo x). <br>
 
 Seja ```s``` a soma entre os vetores ```X``` e ```Z```. Por trigonometria básica, temos que: <br>
-- ```&theta; = arctan(Y / sqtr(X² + Z²))```
+- ```θ = arctan(Y / sqtr(X² + Z²))```
 
 Analogamente, o ângulo &phi; de rotação (ângulo de &alpha; em relação ao solo em torno do eixo y) é dado por:
-- ```&phi; = arctan(- X / sqrt(Y² + Z²))```
+- ```φ = arctan(- X / sqrt(Y² + Z²))```
 
 Utilizando o Framework do Arduino, estes ângulos teriam que ser calculados manualmente, porém, a biblioteca que manipula a MPU6050 em Rust possui um método para calculá-los. Da documentação:
 
@@ -41,7 +41,7 @@ Utilizando o Framework do Arduino, estes ângulos teriam que ser calculados manu
 Estes ângulos descrevem a inclinação do acelerômetro em relação ao solo. No contexto deste projeto, permitem medir a inclinação do antebraço de uma pessoa utilizando uma smartshirt. <br>
 
 Abaixo, um vídeo demonstrando o protótipo funcionando:
-![Demo](demo.mp4)
+[![Demo]()](https://www.youtube.com/watch?v=fgXRD-v5Gzs)
 
 ## Como instalar
 Segue as instruções para rodar o código:
